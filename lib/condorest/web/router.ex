@@ -16,6 +16,7 @@ defmodule Condorest.Web.Router do
   scope "/", Condorest.Web do
     pipe_through :browser # Use the default browser stack
 
+    resources "/users", UserController
     get "/", PageController, :index
   end
 
