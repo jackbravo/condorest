@@ -51,8 +51,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :condorest, Condorest.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "condorest_dev",
+  username: "condorest",
+  password: "condorest",
+  database: "condorest",
   hostname: "localhost",
   pool_size: 10
