@@ -3,9 +3,9 @@ defmodule Condorest.Web.UserControllerTest do
 
   alias Condorest.Accounts
 
-  @create_attrs %{name: "some name", password_hash: "some password_hash", username: "some username"}
-  @update_attrs %{name: "some updated name", password_hash: "some updated password_hash", username: "some updated username"}
-  @invalid_attrs %{name: nil, password_hash: nil, username: nil}
+  @create_attrs %{name: "some name", username: "some username"}
+  @update_attrs %{name: "some updated name", username: "some updated username"}
+  @invalid_attrs %{name: nil, username: nil}
 
   def fixture(:user) do
     {:ok, user} = Accounts.create_user(@create_attrs)

@@ -15,8 +15,8 @@ defmodule Condorest.Accounts.User do
   @doc false
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:name, :username, :password_hash])
-    |> validate_required([:name, :username, :password_hash])
+    |> cast(attrs, [:name, :username])
+    |> validate_required([:name, :username])
     |> unique_constraint(:username)
   end
 end
