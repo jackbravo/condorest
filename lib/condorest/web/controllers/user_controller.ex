@@ -1,5 +1,6 @@
 defmodule Condorest.Web.UserController do
   use Condorest.Web, :controller
+  plug :authenticate when action in [:index, :show]
 
   alias Condorest.Accounts
 
@@ -55,5 +56,16 @@ defmodule Condorest.Web.UserController do
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))
+  end
+
+  defp authenticate(conn, _opts) do
+    if conn.assigns.current_user do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You must be logged in to access that page")
+      |> redirect(to: page_path(conn, :index))
+      |> halt()
+    end
   end
 end
