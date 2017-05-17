@@ -1,6 +1,6 @@
 defmodule Condorest.Web.UserController do
   use Condorest.Web, :controller
-  plug :authenticate when action in [:index, :show]
+  plug :authenticate
 
   alias Condorest.Accounts
 
