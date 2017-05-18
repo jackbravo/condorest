@@ -17,4 +17,18 @@ defmodule Condorest.Auth do
     |> put_session(:user_id, user.id)
     |> configure_session(renew: true)
   end
+
+  def login_by_username_and_pass(conn, username, given_pass) do
+    user = Condorest.Accounts.get_user_by_username(username)
+
+    cond do
+      user && Comeonin.Bcrypt.checkpw(given_pass, user.password_hash) ->
+        {:ok, login(conn, user)}
+      user ->
+        {:error, :unauthorized, conn}
+      true ->
+        Comeonin.Bcrypt.dummy_checkpw()
+        {:error, :not_found, conn}
+    end
+  end
 end
