@@ -25,6 +25,8 @@ defmodule Condorest.Web.Router do
     pipe_through [:browser, :authenticate_user]
 
     resources "/users", UserController
+    resources "/lots", LotController
+    resources "/contacts", ContactController
   end
 
   # Other scopes may use custom stacks.

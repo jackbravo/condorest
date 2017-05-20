@@ -1,0 +1,23 @@
+<h2>Show Contact</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @contact.name %>
+  </li>
+
+  <li>
+    <strong>Phonenumber:</strong>
+    <%= @contact.phonenumber %>
+  </li>
+
+  <li>
+    <strong>Is owner:</strong>
+    <%= @contact.is_owner %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: contact_path(@conn, :edit, @contact) %></span>
+<span><%= link "Back", to: contact_path(@conn, :index) %></span>

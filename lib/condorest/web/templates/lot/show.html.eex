@@ -1,0 +1,18 @@
+<h2>Show Lot</h2>
+
+<ul>
+
+  <li>
+    <strong>Code:</strong>
+    <%= @lot.code %>
+  </li>
+
+  <li>
+    <strong>Address:</strong>
+    <%= @lot.address %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: lot_path(@conn, :edit, @lot) %></span>
+<span><%= link "Back", to: lot_path(@conn, :index) %></span>

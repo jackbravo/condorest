@@ -1,0 +1,28 @@
+<h2>Listing Lots</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Address</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for lot <- @lots do %>
+    <tr>
+      <td><%= lot.code %></td>
+      <td><%= lot.address %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: lot_path(@conn, :show, lot), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: lot_path(@conn, :edit, lot), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: lot_path(@conn, :delete, lot), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Lot", to: lot_path(@conn, :new) %></span>
