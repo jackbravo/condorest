@@ -6,7 +6,7 @@ defmodule Condorest.Repo.Migrations.CreateCondorest.Lots.Contact do
       add :name, :string
       add :phonenumber, :string
       add :is_owner, :boolean, default: false, null: false
-      add :lot_id, references(:lots, on_delete: :nothing)
+      add :lot_id, references(:lots_lots)
 
       timestamps()
     end
