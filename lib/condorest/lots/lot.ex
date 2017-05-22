@@ -19,4 +19,11 @@ defmodule Condorest.Lots.Lot do
     |> validate_required([:code])
     |> unique_constraint(:code)
   end
+
+  @doc false
+  def delete_changeset(%Lot{} = lot) do
+    lot
+    |> Ecto.Changeset.change()
+    |> foreign_key_constraint(:lots_lots, name: :lots_contacts_lot_id_fkey, message: "still exist")
+  end
 end

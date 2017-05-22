@@ -50,10 +50,16 @@ defmodule Condorest.Web.LotController do
 
   def delete(conn, %{"id" => id}) do
     lot = Lots.get_lot!(id)
-    {:ok, _lot} = Lots.delete_lot(lot)
-
-    conn
-    |> put_flash(:info, "Lot deleted successfully.")
-    |> redirect(to: lot_path(conn, :index))
+    
+    case Lots.delete_lot(lot) do
+      {:ok, _lot} ->
+        conn
+        |> put_flash(:info, "Lot deleted successfully.")
+        |> redirect(to: lot_path(conn, :index))
+      {:error, _changeset} ->
+        conn
+        |> put_flash(:error, "Could not delete lot.")
+        |> redirect(to: lot_path(conn, :index))
+    end
   end
 end

@@ -93,7 +93,8 @@ defmodule Condorest.Lots do
 
   """
   def delete_lot(%Lot{} = lot) do
-    Repo.delete(lot)
+    Lot.delete_changeset(lot)
+    |> Repo.delete
   end
 
   @doc """
