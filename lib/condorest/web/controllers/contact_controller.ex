@@ -1,7 +1,7 @@
 defmodule Condorest.Web.ContactController do
   use Condorest.Web, :controller
-
   alias Condorest.Lots
+  plug :load_lots when action in [:new, :create, :edit, :update]
 
   def index(conn, _params) do
     contacts = Lots.list_contacts()
@@ -10,8 +10,7 @@ defmodule Condorest.Web.ContactController do
 
   def new(conn, _params) do
     changeset = Lots.change_contact(%Condorest.Lots.Contact{})
-    lots = Lots.list_lots_for_select()
-    render(conn, "new.html", changeset: changeset, lots: lots)
+    render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"contact" => contact_params}) do
@@ -32,9 +31,8 @@ defmodule Condorest.Web.ContactController do
 
   def edit(conn, %{"id" => id}) do
     contact = Lots.get_contact!(id)
-    lots = Lots.list_lots_for_select()
     changeset = Lots.change_contact(contact)
-    render(conn, "edit.html", contact: contact, changeset: changeset, lots: lots)
+    render(conn, "edit.html", contact: contact, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "contact" => contact_params}) do
@@ -57,5 +55,10 @@ defmodule Condorest.Web.ContactController do
     conn
     |> put_flash(:info, "Contact deleted successfully.")
     |> redirect(to: contact_path(conn, :index))
+  end
+
+  defp load_lots(conn, _) do
+    lots = Lots.list_lots_for_select()
+    assign(conn, :lots, lots)
   end
 end
