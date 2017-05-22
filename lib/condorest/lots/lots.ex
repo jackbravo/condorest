@@ -22,6 +22,13 @@ defmodule Condorest.Lots do
   end
 
   @doc """
+  Returns the list of lots as a {code,id} touple so we can use it in select lists
+  """
+  def list_lots_for_select do
+      from(l in Lot, select: {l.code, l.id}) |> Repo.all
+  end
+
+  @doc """
   Gets a single lot.
 
   Raises `Ecto.NoResultsError` if the Lot does not exist.

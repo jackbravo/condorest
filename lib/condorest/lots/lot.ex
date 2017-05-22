@@ -7,6 +7,7 @@ defmodule Condorest.Lots.Lot do
   schema "lots_lots" do
     field :address, :string
     field :code, :string
+    has_many :contacts, Condorest.Lots.Contact
 
     timestamps()
   end
@@ -15,7 +16,7 @@ defmodule Condorest.Lots.Lot do
   def changeset(%Lot{} = lot, attrs) do
     lot
     |> cast(attrs, [:code, :address])
-    |> validate_required([:code, :address])
+    |> validate_required([:code])
     |> unique_constraint(:code)
   end
 end

@@ -12,6 +12,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :lot_id, class: "control-label" %>
+    <%= select f, :lot_id, @lots, prompt: "Choose a lot", class: "form-control" %>
+    <%= error_tag f, :lot_id %>
+  </div>
+
+  <div class="form-group">
     <%= label f, :phonenumber, class: "control-label" %>
     <%= text_input f, :phonenumber, class: "form-control" %>
     <%= error_tag f, :phonenumber %>

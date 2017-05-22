@@ -10,7 +10,8 @@ defmodule Condorest.Web.ContactController do
 
   def new(conn, _params) do
     changeset = Lots.change_contact(%Condorest.Lots.Contact{})
-    render(conn, "new.html", changeset: changeset)
+    lots = Lots.list_lots_for_select()
+    render(conn, "new.html", changeset: changeset, lots: lots)
   end
 
   def create(conn, %{"contact" => contact_params}) do
@@ -31,8 +32,9 @@ defmodule Condorest.Web.ContactController do
 
   def edit(conn, %{"id" => id}) do
     contact = Lots.get_contact!(id)
+    lots = Lots.list_lots_for_select()
     changeset = Lots.change_contact(contact)
-    render(conn, "edit.html", contact: contact, changeset: changeset)
+    render(conn, "edit.html", contact: contact, changeset: changeset, lots: lots)
   end
 
   def update(conn, %{"id" => id, "contact" => contact_params}) do

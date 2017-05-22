@@ -8,7 +8,7 @@ defmodule Condorest.Lots.Contact do
     field :is_owner, :boolean, default: false
     field :name, :string
     field :phonenumber, :string
-    field :lot_id, :id
+    belongs_to :lot, Condorest.Lots.Lot
 
     timestamps()
   end
@@ -16,7 +16,7 @@ defmodule Condorest.Lots.Contact do
   @doc false
   def changeset(%Contact{} = contact, attrs) do
     contact
-    |> cast(attrs, [:name, :phonenumber, :is_owner])
-    |> validate_required([:name, :phonenumber, :is_owner])
+    |> cast(attrs, [:name, :phonenumber, :is_owner, :lot_id])
+    |> validate_required([:name])
   end
 end
