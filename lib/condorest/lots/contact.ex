@@ -18,5 +18,6 @@ defmodule Condorest.Lots.Contact do
     contact
     |> cast(attrs, [:name, :phonenumber, :is_owner, :lot_id])
     |> validate_required([:name])
+    |> assoc_constraint(:lot)
   end
 end
