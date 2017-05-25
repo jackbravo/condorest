@@ -42,7 +42,7 @@ defmodule Condorest.Lots do
       ** (Ecto.NoResultsError)
 
   """
-  def get_lot!(id), do: Repo.get!(Lot, id)
+  def get_lot!(id), do: Repo.get!(Lot, id) |> Repo.preload(:contacts)
 
   @doc """
   Creates a lot.

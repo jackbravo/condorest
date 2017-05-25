@@ -1,17 +1,9 @@
-<h2>Show Lot</h2>
+<h2><%= @lot.code %> <small><%= @lot.address %></small></h2>
 
 <ul>
-
-  <li>
-    <strong>Code:</strong>
-    <%= @lot.code %>
-  </li>
-
-  <li>
-    <strong>Address:</strong>
-    <%= @lot.address %>
-  </li>
-
+<%= for contact <- @lot.contacts do %>
+  <li><%= contact.name %> (<%= contact.phonenumber %>)</li>
+<% end %>
 </ul>
 
 <span><%= link "Edit", to: lot_path(@conn, :edit, @lot) %></span>
