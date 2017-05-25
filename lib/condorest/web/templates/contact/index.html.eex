@@ -4,6 +4,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Lot</th>
       <th>Phonenumber</th>
       <th>Is owner</th>
 
@@ -14,6 +15,7 @@
 <%= for contact <- @contacts do %>
     <tr>
       <td><%= contact.name %></td>
+      <td><%= contact.lot.code %></td>
       <td><%= contact.phonenumber %></td>
       <td><%= contact.is_owner %></td>
 
