@@ -1,14 +1,14 @@
 defmodule Condorest.Web.LotControllerTest do
   use Condorest.Web.ConnCase
 
-  alias Condorest.Lots
+  alias Condorest.Entity
 
   @create_attrs %{address: "some address", code: "some code"}
   @update_attrs %{address: "some updated address", code: "some updated code"}
   @invalid_attrs %{address: nil, code: nil}
 
   def fixture(:lot) do
-    {:ok, lot} = Lots.create_lot(@create_attrs)
+    {:ok, lot} = Entity.create_lot(@create_attrs)
     lot
   end
 

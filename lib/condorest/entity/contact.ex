@@ -1,14 +1,14 @@
-defmodule Condorest.Lots.Contact do
+defmodule Condorest.Entity.Contact do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Condorest.Lots.Contact
+  alias Condorest.Entity.Contact
 
 
-  schema "lots_contacts" do
+  schema "entity_contacts" do
     field :is_owner, :boolean, default: false
     field :name, :string
     field :phonenumber, :string
-    belongs_to :lot, Condorest.Lots.Lot
+    belongs_to :lot, Condorest.Entity.Lot
 
     timestamps()
   end

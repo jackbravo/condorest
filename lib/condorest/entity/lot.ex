@@ -1,13 +1,13 @@
-defmodule Condorest.Lots.Lot do
+defmodule Condorest.Entity.Lot do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Condorest.Lots.Lot
+  alias Condorest.Entity.Lot
 
 
-  schema "lots_lots" do
+  schema "entity_lots" do
     field :address, :string
     field :code, :string
-    has_many :contacts, Condorest.Lots.Contact
+    has_many :contacts, Condorest.Entity.Contact
 
     timestamps()
   end
@@ -24,6 +24,6 @@ defmodule Condorest.Lots.Lot do
   def delete_changeset(%Lot{} = lot) do
     lot
     |> Ecto.Changeset.change()
-    |> foreign_key_constraint(:lots_lots, name: :lots_contacts_lot_id_fkey, message: "still exist")
+    |> foreign_key_constraint(:entity_lots, name: :entity_contacts_lot_id_fkey, message: "still exist")
   end
 end

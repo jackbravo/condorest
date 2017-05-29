@@ -1,12 +1,12 @@
-defmodule Condorest.Lots do
+defmodule Condorest.Entity do
   @moduledoc """
-  The boundary for the Lots system.
+  The boundary for the Entity system.
   """
 
   import Ecto.Query, warn: false
   alias Condorest.Repo
 
-  alias Condorest.Lots.Lot
+  alias Condorest.Entity.Lot
 
   @doc """
   Returns the list of lots.
@@ -110,7 +110,7 @@ defmodule Condorest.Lots do
     Lot.changeset(lot, %{})
   end
 
-  alias Condorest.Lots.Contact
+  alias Condorest.Entity.Contact
 
   @doc """
   Returns the list of contacts.

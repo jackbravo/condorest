@@ -1,14 +1,14 @@
 defmodule Condorest.Web.ContactControllerTest do
   use Condorest.Web.ConnCase
 
-  alias Condorest.Lots
+  alias Condorest.Entity
 
   @create_attrs %{is_owner: true, name: "some name", phonenumber: "some phonenumber"}
   @update_attrs %{is_owner: false, name: "some updated name", phonenumber: "some updated phonenumber"}
   @invalid_attrs %{is_owner: nil, name: nil, phonenumber: nil}
 
   def fixture(:contact) do
-    {:ok, contact} = Lots.create_contact(@create_attrs)
+    {:ok, contact} = Entity.create_contact(@create_attrs)
     contact
   end
 
