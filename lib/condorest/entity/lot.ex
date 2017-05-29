@@ -2,12 +2,14 @@ defmodule Condorest.Entity.Lot do
   use Ecto.Schema
   import Ecto.Changeset
   alias Condorest.Entity.Lot
+  alias Condorest.Entity.Contact
+  alias Condorest.Entity.LotContact
 
 
   schema "entity_lots" do
     field :address, :string
     field :code, :string
-    has_many :contacts, Condorest.Entity.Contact
+    many_to_many :contacts, Contact, join_through: LotContact, unique: true
 
     timestamps()
   end

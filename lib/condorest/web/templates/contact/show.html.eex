@@ -13,8 +13,8 @@
   </li>
 
   <li>
-    <strong>Is owner:</strong>
-    <%= @contact.is_owner %>
+    <strong>Details:</strong>
+    <%= text_to_html @contact.details %>
   </li>
 
 </ul>

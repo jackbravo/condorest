@@ -123,7 +123,7 @@ defmodule Condorest.Entity do
   """
   def list_contacts do
     Repo.all(Contact)
-    |> Repo.preload(:lot)
+    |> Repo.preload(:lots)
   end
 
   @doc """
