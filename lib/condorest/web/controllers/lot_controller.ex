@@ -1,7 +1,7 @@
 defmodule Condorest.Web.LotController do
   use Condorest.Web, :controller
-
   alias Condorest.Entity
+  plug :load_contacts when action in [:new, :create, :edit, :update]
 
   def index(conn, _params) do
     lots = Entity.list_lots()
@@ -61,5 +61,10 @@ defmodule Condorest.Web.LotController do
         |> put_flash(:error, "Could not delete lot.")
         |> redirect(to: lot_path(conn, :index))
     end
+  end
+
+  defp load_contacts(conn, _) do
+    contacts = Entity.list_contacts_for_select()
+    assign(conn, :contacts, contacts)
   end
 end

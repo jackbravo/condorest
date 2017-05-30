@@ -1,5 +1,9 @@
 <h2><%= @lot.code %> <small><%= @lot.address %></small></h2>
 
+<%= if @lot.contact do %>
+<p><strong>Owner:</strong> <%= @lot.contact.name %></p>
+<% end %>
+
 <ul>
 <%= for contact <- @lot.contacts do %>
   <li><%= contact.name %> (<%= contact.phonenumber %>)</li>

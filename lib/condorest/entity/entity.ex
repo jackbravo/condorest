@@ -19,13 +19,14 @@ defmodule Condorest.Entity do
   """
   def list_lots do
     Repo.all(Lot)
+    |> Repo.preload(:contact)
   end
 
   @doc """
   Returns the list of lots as a {code,id} touple so we can use it in select lists
   """
   def list_lots_for_select do
-      from(l in Lot, select: {l.code, l.id}) |> Repo.all
+    from(l in Lot, select: {l.code, l.id}) |> Repo.all
   end
 
   @doc """
@@ -42,7 +43,11 @@ defmodule Condorest.Entity do
       ** (Ecto.NoResultsError)
 
   """
-  def get_lot!(id), do: Repo.get!(Lot, id) |> Repo.preload(:contacts)
+  def get_lot!(id) do
+    Repo.get!(Lot, id)
+    |> Repo.preload(:contacts)
+    |> Repo.preload(:contact)
+  end
 
   @doc """
   Creates a lot.
@@ -93,8 +98,7 @@ defmodule Condorest.Entity do
 
   """
   def delete_lot(%Lot{} = lot) do
-    Lot.delete_changeset(lot)
-    |> Repo.delete
+    Repo.delete(lot)
   end
 
   @doc """
@@ -124,6 +128,13 @@ defmodule Condorest.Entity do
   def list_contacts do
     Repo.all(Contact)
     |> Repo.preload(:lots)
+  end
+
+  @doc """
+  Returns the list of contacts as a {name,id} touple so we can use it in select lists
+  """
+  def list_contacts_for_select do
+      from(i in Contact, select: {i.name, i.id}) |> Repo.all
   end
 
   @doc """
