@@ -19,7 +19,7 @@ defmodule Condorest.Entity do
   """
   def list_lots do
     Repo.all(Lot)
-    |> Repo.preload(:contact)
+    |> Repo.preload(:owner)
   end
 
   def list_lots(ids) do
@@ -50,7 +50,7 @@ defmodule Condorest.Entity do
   def get_lot!(id) do
     Repo.get!(Lot, id)
     |> Repo.preload(:contacts)
-    |> Repo.preload(:contact)
+    |> Repo.preload(:owner)
   end
 
   @doc """
@@ -131,6 +131,7 @@ defmodule Condorest.Entity do
   """
   def list_contacts do
     Repo.all(Contact)
+    |> Repo.preload(:lots_owned)
     |> Repo.preload(:lots)
   end
 

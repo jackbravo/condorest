@@ -24,7 +24,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :lots, class: "control-label" %>
+    <%= label f, :lots, "Contact for lots", class: "control-label" %>
     <%= multiple_select f, :lots, @lots, selected: Enum.map(@contact_lots, &(&1.id)), class: "form-control" %>
     <%= error_tag f, :lots %>
   </div>

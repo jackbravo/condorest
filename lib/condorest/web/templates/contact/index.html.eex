@@ -5,7 +5,8 @@
     <tr>
       <th>Name</th>
       <th>Phonenumber</th>
-      <th>Lots</th>
+      <th>Owner for</th>
+      <th>Contact for</th>
 
       <th></th>
     </tr>
@@ -15,6 +16,11 @@
     <tr>
       <td><%= contact.name %></td>
       <td><%= contact.phonenumber %></td>
+      <td>
+<%= for lot <- contact.lots_owned do %>
+        <%= lot.code %>
+<% end %>
+      </td>
       <td>
 <%= for lot <- contact.lots do %>
         <%= lot.code %>

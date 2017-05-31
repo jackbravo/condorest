@@ -16,8 +16,8 @@
       <td><%= lot.code %></td>
       <td><%= lot.address %></td>
       <td>
-<%= if lot.contact do %>
-        <%= lot.contact.name %>
+<%= if lot.owner do %>
+        <%= lot.owner.name %>
 <% end %>
       </td>
 

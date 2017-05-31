@@ -1,7 +1,7 @@
 <h2><%= @lot.code %> <small><%= @lot.address %></small></h2>
 
-<%= if @lot.contact do %>
-<p><strong>Owner:</strong> <%= @lot.contact.name %></p>
+<%= if @lot.owner do %>
+<p><strong>Owner:</strong> <%= @lot.owner.name %></p>
 <% end %>
 
 <p><strong>Contacts:</strong>

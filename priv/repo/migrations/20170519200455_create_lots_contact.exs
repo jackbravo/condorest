@@ -13,7 +13,7 @@ defmodule Condorest.Repo.Migrations.CreateCondorest.Entity.Contact do
     create table(:entity_lots) do
       add :code, :string
       add :address, :string
-      add :contact_id, references(:entity_contacts, on_delete: :nilify_all)
+      add :owner_id, references(:entity_contacts, on_delete: :nilify_all)
 
       timestamps()
     end
