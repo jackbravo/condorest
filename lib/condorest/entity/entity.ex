@@ -22,6 +22,10 @@ defmodule Condorest.Entity do
     |> Repo.preload(:contact)
   end
 
+  def list_lots(ids) do
+    from(i in Lot, where: i.id in ^ids) |> Repo.all
+  end
+
   @doc """
   Returns the list of lots as a {code,id} touple so we can use it in select lists
   """
@@ -130,6 +134,10 @@ defmodule Condorest.Entity do
     |> Repo.preload(:lots)
   end
 
+  def list_contacts(ids) do
+    from(i in Contact, where: i.id in ^ids) |> Repo.all
+  end
+
   @doc """
   Returns the list of contacts as a {name,id} touple so we can use it in select lists
   """
@@ -151,7 +159,7 @@ defmodule Condorest.Entity do
       ** (Ecto.NoResultsError)
 
   """
-  def get_contact!(id), do: Repo.get!(Contact, id)
+  def get_contact!(id), do: Repo.get!(Contact, id) |> Repo.preload(:lots)
 
   @doc """
   Creates a contact.

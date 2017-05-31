@@ -9,7 +9,7 @@ defmodule Condorest.Entity.Lot do
     field :address, :string
     field :code, :string
     belongs_to :contact, Contact
-    many_to_many :contacts, Contact, join_through: "entity_lot_contacts", unique: true
+    many_to_many :contacts, Contact, join_through: "entity_lot_contacts", unique: true, on_replace: :delete
 
     timestamps()
   end
@@ -21,5 +21,6 @@ defmodule Condorest.Entity.Lot do
     |> validate_required([:code])
     |> unique_constraint(:code)
     |> foreign_key_constraint(:contact_id)
+    |> put_assoc(:contacts, Condorest.Entity.list_contacts(attrs["contacts"] || []))
   end
 end

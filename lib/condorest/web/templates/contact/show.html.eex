@@ -14,10 +14,18 @@
 
   <li>
     <strong>Details:</strong>
-    <%= text_to_html @contact.details %>
+    <%= text_to_html(@contact.details || "") %>
   </li>
 
 </ul>
+
+<p><strong>Contact for lots:</strong>
+<ul>
+<%= for lot <- @contact.lots do %>
+  <li><%= lot.code %> (<%= lot.address %>)</li>
+<% end %>
+</ul>
+</p>
 
 <span><%= link "Edit", to: contact_path(@conn, :edit, @contact) %></span>
 <span><%= link "Back", to: contact_path(@conn, :index) %></span>

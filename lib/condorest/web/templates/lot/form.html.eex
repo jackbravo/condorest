@@ -24,6 +24,12 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :contacts, class: "control-label" %>
+    <%= multiple_select f, :contacts, @contacts, selected: Enum.map(@lot_contacts, &(&1.id)), class: "form-control" %>
+    <%= error_tag f, :contacts %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

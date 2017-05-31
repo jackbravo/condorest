@@ -1,6 +1,7 @@
 <h2>New Lot</h2>
 
 <%= render "form.html", changeset: @changeset,
+                        lot_contacts: [],
                         contacts: @contacts,
                         action: lot_path(@conn, :create) %>
 
