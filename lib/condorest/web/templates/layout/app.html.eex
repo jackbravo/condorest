@@ -9,32 +9,49 @@
 
     <title>Hello Condorest!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    <div class="container">
-      <header class="header">
-        <ol class="breadcrumb text-right">
-          <%= if @current_user do %>
+    <div class="row-offcanvas row-offcanvas-left">
+    <div id="sidebar" class="sidebar-offcanvas">
+    <div class="col-md-12">
+      <h2>CondoREST</h2>
+      <ul>
+        <%= if @current_user do %>
+        <li><label class="nav-header">Entities</label></li>
+        <ul class="">
+          <li><%= link "Lots", to: lot_path(@conn, :index) %></li>
+          <li><%= link "Contacts", to: contact_path(@conn, :index) %></li>
+          <li><%= link "Lot types", to: lot_type_path(@conn, :index) %></li>
+        </ul>
+        <li><label class="nav-header">Session</label></li>
+        <ul class="">
             <li><%= @current_user.username %></li>
-            <li><%= link "Lots", to: lot_path(@conn, :index) %></li>
-            <li><%= link "Contacts", to: contact_path(@conn, :index) %></li>
             <li><%= link "Log out", to: session_path(@conn, :delete, @current_user), method: "delete" %></li>
-          <% else %>
+        <% else %>
             <li><%= link "Log in", to: session_path(@conn, :new) %></li>
-          <% end %>
-        </ol>
-        <span class="logo"></span>
-      </header>
+        <% end %>
+        </ul>
+      </ul>
+    </div> <!-- /col -->
+    </div> <!-- /sidebar -->
 
+    <div id="main">
+    <div class="col-md-12">
+      <button class="sidebar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <svg height="20px" id="Layer_1" style="enable-background:new 0 0 32 32;" version="1.1" viewBox="0 0 32 32" width="20px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M4,10h24c1.104,0,2-0.896,2-2s-0.896-2-2-2H4C2.896,6,2,6.896,2,8S2.896,10,4,10z M28,14H4c-1.104,0-2,0.896-2,2  s0.896,2,2,2h24c1.104,0,2-0.896,2-2S29.104,14,28,14z M28,22H4c-1.104,0-2,0.896-2,2s0.896,2,2,2h24c1.104,0,2-0.896,2-2  S29.104,22,28,22z"/></svg>
+      </button>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>
-
-    </div> <!-- /container -->
+    </div> <!-- /col -->
+    </div> <!-- /main -->
+    </div> <!-- /row -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
