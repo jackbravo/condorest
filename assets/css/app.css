@@ -18,20 +18,23 @@ body,html,.row-offcanvas {
   background-color: transparent;
   border: none;
   padding: 0;
+  -webkit-transition: all 0.25s ease-out;
+  -moz-transition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
   will-change: transform;
   -webkit-transform: none;
   transform: none;
 }
 
 .row-offcanvas-left.active .sidebar-toggle {
-  -webkit-transform: translateX(-22px);
-  transform: translateX(-22px);
+  -webkit-transform: translateX(-32px);
+  transform: translateX(-32px);
 }
 
 #sidebar {
   width: inherit;
-  min-width: 300px;
-  max-width: 300px;
+  min-width: 290px;
+  max-width: 290px;
   background-color:#f5f5f5;
   float: left;
   height:100%;
@@ -57,12 +60,12 @@ body,html,.row-offcanvas {
     -webkit-transition: all 0.25s ease-out;
     -moz-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
-    width:calc(100% + 300px);
+    width:calc(100% + 290px);
   }
     
   .row-offcanvas-left
   {
-    left: -300px;
+    left: -290px;
   }
 
   .row-offcanvas-left.active {
