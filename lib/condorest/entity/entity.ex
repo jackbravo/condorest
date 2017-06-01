@@ -162,7 +162,11 @@ defmodule Condorest.Entity do
       ** (Ecto.NoResultsError)
 
   """
-  def get_contact!(id), do: Repo.get!(Contact, id) |> Repo.preload(:lots)
+  def get_contact!(id) do
+    Repo.get!(Contact, id)
+    |> Repo.preload(:lots)
+    |> Repo.preload(:lots_owned)
+  end
 
   @doc """
   Creates a contact.

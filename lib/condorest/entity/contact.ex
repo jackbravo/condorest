@@ -9,7 +9,7 @@ defmodule Condorest.Entity.Contact do
     field :name, :string
     field :phonenumber, :string
     field :details, :string
-    has_many :lots_owned, Lot, foreign_key: :owner_id
+    has_many :lots_owned, Lot, foreign_key: :owner_id, on_replace: :nilify
     many_to_many :lots, Lot, join_through: "entity_lot_contacts", unique: true, on_replace: :delete
 
     timestamps()
@@ -21,5 +21,6 @@ defmodule Condorest.Entity.Contact do
     |> cast(attrs, [:name, :phonenumber, :details])
     |> validate_required([:name])
     |> put_assoc(:lots, Condorest.Entity.list_lots(attrs["lots"] || []))
+    |> put_assoc(:lots_owned, Condorest.Entity.list_lots(attrs["lots_owned"] || []))
   end
 end

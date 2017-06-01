@@ -19,6 +19,14 @@
 
 </ul>
 
+<p><strong>Owner for lots:</strong>
+<ul>
+<%= for lot <- @contact.lots_owned do %>
+  <li><%= lot.name %> (<%= lot.address %>)</li>
+<% end %>
+</ul>
+</p>
+
 <p><strong>Contact for lots:</strong>
 <ul>
 <%= for lot <- @contact.lots do %>
