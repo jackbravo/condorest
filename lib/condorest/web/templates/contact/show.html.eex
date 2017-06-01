@@ -22,7 +22,7 @@
 <p><strong>Contact for lots:</strong>
 <ul>
 <%= for lot <- @contact.lots do %>
-  <li><%= lot.code %> (<%= lot.address %>)</li>
+  <li><%= lot.name %> (<%= lot.address %>)</li>
 <% end %>
 </ul>
 </p>

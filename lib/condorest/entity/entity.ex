@@ -28,10 +28,10 @@ defmodule Condorest.Entity do
   end
 
   @doc """
-  Returns the list of lots as a {code,id} touple so we can use it in select lists
+  Returns the list of lots as a {name,id} touple so we can use it in select lists
   """
   def list_lots_for_select do
-    from(l in Lot, select: {l.code, l.id}) |> Repo.all
+    from(l in Lot, select: {l.name, l.id}) |> Repo.all
   end
 
   @doc """

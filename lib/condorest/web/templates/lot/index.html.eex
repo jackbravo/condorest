@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Code</th>
+      <th>Name</th>
       <th>Address</th>
       <th>Owner</th>
       <th>Type</th>
@@ -14,7 +14,7 @@
   <tbody>
 <%= for lot <- @lots do %>
     <tr>
-      <td><%= lot.code %></td>
+      <td><%= lot.name %></td>
       <td><%= lot.address %></td>
       <td>
 <%= if lot.owner do %>

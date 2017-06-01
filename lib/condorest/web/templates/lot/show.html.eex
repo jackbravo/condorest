@@ -1,4 +1,4 @@
-<h2><%= @lot.code %> <small><%= @lot.lot_type.name %> - <%= @lot.address %></small></h2>
+<h2><%= @lot.name %> <small><%= @lot.lot_type.name %> - <%= @lot.address %></small></h2>
 
 <%= if @lot.owner do %>
 <p><strong>Owner:</strong> <%= @lot.owner.name %></p>

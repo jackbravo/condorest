@@ -18,12 +18,12 @@
       <td><%= contact.phonenumber %></td>
       <td>
 <%= for lot <- contact.lots_owned do %>
-        <%= lot.code %>
+        <%= lot.name %>
 <% end %>
       </td>
       <td>
 <%= for lot <- contact.lots do %>
-        <%= lot.code %>
+        <%= lot.name %>
 <% end %>
       </td>
 
