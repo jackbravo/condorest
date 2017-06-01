@@ -1,0 +1,6 @@
+<h2>New Lot type</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: lot_type_path(@conn, :create) %>
+
+<span><%= link "Back", to: lot_type_path(@conn, :index) %></span>

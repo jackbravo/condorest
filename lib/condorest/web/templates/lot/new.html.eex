@@ -3,6 +3,7 @@
 <%= render "form.html", changeset: @changeset,
                         lot_contacts: [],
                         contacts: @contacts,
+                        lot_types: @lot_types,
                         action: lot_path(@conn, :create) %>
 
 <span><%= link "Back", to: lot_path(@conn, :index) %></span>

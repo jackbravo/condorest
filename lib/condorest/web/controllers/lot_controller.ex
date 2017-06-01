@@ -1,7 +1,7 @@
 defmodule Condorest.Web.LotController do
   use Condorest.Web, :controller
   alias Condorest.Entity
-  plug :load_contacts when action in [:new, :create, :edit, :update]
+  plug :load_select_lists when action in [:new, :create, :edit, :update]
 
   def index(conn, _params) do
     lots = Entity.list_lots()
@@ -63,8 +63,12 @@ defmodule Condorest.Web.LotController do
     end
   end
 
-  defp load_contacts(conn, _) do
+  defp load_select_lists(conn, _) do
     contacts = Entity.list_contacts_for_select()
-    assign(conn, :contacts, contacts)
+    lot_types = Entity.list_lot_types_for_select()
+
+    conn
+    |> assign(:contacts, contacts)
+    |> assign(:lot_types, lot_types)
   end
 end

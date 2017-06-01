@@ -1,0 +1,25 @@
+<h2>Listing Lot types</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for lot_type <- @lot_types do %>
+    <tr>
+      <td><%= lot_type.name %></td>
+
+      <td class="text-right">
+        <span><%= link "Edit", to: lot_type_path(@conn, :edit, lot_type), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: lot_type_path(@conn, :delete, lot_type), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Lot type", to: lot_type_path(@conn, :new) %></span>

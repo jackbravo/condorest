@@ -2,6 +2,11 @@ defmodule Condorest.Repo.Migrations.CreateCondorest.Entity.Contact do
   use Ecto.Migration
 
   def change do
+    create table(:entity_lot_types) do
+      add :name, :string
+      timestamps()
+    end
+
     create table(:entity_contacts) do
       add :name, :string
       add :phonenumber, :string
@@ -14,6 +19,7 @@ defmodule Condorest.Repo.Migrations.CreateCondorest.Entity.Contact do
       add :code, :string
       add :address, :string
       add :owner_id, references(:entity_contacts, on_delete: :nilify_all)
+      add :lot_type_id, references(:entity_lot_types, on_delete: :nilify_all)
 
       timestamps()
     end

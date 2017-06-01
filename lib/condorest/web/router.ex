@@ -26,6 +26,7 @@ defmodule Condorest.Web.Router do
 
     resources "/users", UserController
     resources "/lots", LotController
+    resources "/lot_types", LotTypeController, only: [:new, :create, :index, :delete, :edit, :update]
     resources "/contacts", ContactController
   end
 

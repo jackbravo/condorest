@@ -9,6 +9,7 @@ defmodule Condorest.Entity.Lot do
     field :address, :string
     field :code, :string
     belongs_to :owner, Contact
+    belongs_to :lot_type, Condorest.Entity.LotType
     many_to_many :contacts, Contact, join_through: "entity_lot_contacts", unique: true, on_replace: :delete
 
     timestamps()
@@ -17,10 +18,11 @@ defmodule Condorest.Entity.Lot do
   @doc false
   def changeset(%Lot{} = lot, attrs) do
     lot
-    |> cast(attrs, [:code, :address, :owner_id])
+    |> cast(attrs, [:code, :address, :owner_id, :lot_type_id])
     |> validate_required([:code])
     |> unique_constraint(:code)
     |> foreign_key_constraint(:owner_id)
+    |> foreign_key_constraint(:lot_type_id)
     |> put_assoc(:contacts, Condorest.Entity.list_contacts(attrs["contacts"] || []))
   end
 end

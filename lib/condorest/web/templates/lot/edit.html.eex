@@ -2,6 +2,7 @@
 
 <%= render "form.html", changeset: @changeset,
                         contacts: @contacts,
+                        lot_types: @lot_types,
                         lot_contacts: @lot.contacts,
                         action: lot_path(@conn, :update, @lot) %>
 

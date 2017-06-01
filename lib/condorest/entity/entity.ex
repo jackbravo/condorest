@@ -20,6 +20,7 @@ defmodule Condorest.Entity do
   def list_lots do
     Repo.all(Lot)
     |> Repo.preload(:owner)
+    |> Repo.preload(:lot_type)
   end
 
   def list_lots(ids) do
@@ -51,6 +52,7 @@ defmodule Condorest.Entity do
     Repo.get!(Lot, id)
     |> Repo.preload(:contacts)
     |> Repo.preload(:owner)
+    |> Repo.preload(:lot_type)
   end
 
   @doc """
@@ -225,5 +227,37 @@ defmodule Condorest.Entity do
   """
   def change_contact(%Contact{} = contact) do
     Contact.changeset(contact, %{})
+  end
+
+  alias Condorest.Entity.LotType
+
+  def list_lot_types do
+    Repo.all(LotType)
+  end
+
+  def list_lot_types_for_select do
+    from(l in LotType, select: {l.name, l.id}) |> Repo.all
+  end
+
+  def get_lot_type!(id), do: Repo.get!(LotType, id)
+
+  def create_lot_type(attrs \\ %{}) do
+    %LotType{}
+    |> LotType.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_lot_type(%LotType{} = lot_type, attrs) do
+    lot_type
+    |> LotType.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_lot_type(%LotType{} = lot_type) do
+    Repo.delete(lot_type)
+  end
+
+  def change_lot_type(%LotType{} = lot_type) do
+    LotType.changeset(lot_type, %{})
   end
 end

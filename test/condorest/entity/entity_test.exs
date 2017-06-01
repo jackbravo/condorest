@@ -128,4 +128,64 @@ defmodule Condorest.EntityTest do
       assert %Ecto.Changeset{} = Entity.change_contact(contact)
     end
   end
+
+  describe "lot_types" do
+    alias Condorest.Entity.LotType
+
+    @valid_attrs %{name: "some name"}
+    @update_attrs %{name: "some updated name"}
+    @invalid_attrs %{name: nil}
+
+    def lot_type_fixture(attrs \\ %{}) do
+      {:ok, lot_type} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Entity.create_lot_type()
+
+      lot_type
+    end
+
+    test "list_lot_types/0 returns all lot_types" do
+      lot_type = lot_type_fixture()
+      assert Entity.list_lot_types() == [lot_type]
+    end
+
+    test "get_lot_type!/1 returns the lot_type with given id" do
+      lot_type = lot_type_fixture()
+      assert Entity.get_lot_type!(lot_type.id) == lot_type
+    end
+
+    test "create_lot_type/1 with valid data creates a lot_type" do
+      assert {:ok, %LotType{} = lot_type} = Entity.create_lot_type(@valid_attrs)
+      assert lot_type.name == "some name"
+    end
+
+    test "create_lot_type/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Entity.create_lot_type(@invalid_attrs)
+    end
+
+    test "update_lot_type/2 with valid data updates the lot_type" do
+      lot_type = lot_type_fixture()
+      assert {:ok, lot_type} = Entity.update_lot_type(lot_type, @update_attrs)
+      assert %LotType{} = lot_type
+      assert lot_type.name == "some updated name"
+    end
+
+    test "update_lot_type/2 with invalid data returns error changeset" do
+      lot_type = lot_type_fixture()
+      assert {:error, %Ecto.Changeset{}} = Entity.update_lot_type(lot_type, @invalid_attrs)
+      assert lot_type == Entity.get_lot_type!(lot_type.id)
+    end
+
+    test "delete_lot_type/1 deletes the lot_type" do
+      lot_type = lot_type_fixture()
+      assert {:ok, %LotType{}} = Entity.delete_lot_type(lot_type)
+      assert_raise Ecto.NoResultsError, fn -> Entity.get_lot_type!(lot_type.id) end
+    end
+
+    test "change_lot_type/1 returns a lot_type changeset" do
+      lot_type = lot_type_fixture()
+      assert %Ecto.Changeset{} = Entity.change_lot_type(lot_type)
+    end
+  end
 end
