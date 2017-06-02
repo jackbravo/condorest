@@ -101,4 +101,196 @@ defmodule Condorest.Ledger do
   def change_account(%Account{} = account) do
     Account.changeset(account, %{})
   end
+
+  alias Condorest.Ledger.Entry
+
+  @doc """
+  Returns the list of entries.
+
+  ## Examples
+
+      iex> list_entries()
+      [%Entry{}, ...]
+
+  """
+  def list_entries do
+    Repo.all(Entry)
+  end
+
+  @doc """
+  Gets a single entry.
+
+  Raises `Ecto.NoResultsError` if the Entry does not exist.
+
+  ## Examples
+
+      iex> get_entry!(123)
+      %Entry{}
+
+      iex> get_entry!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_entry!(id), do: Repo.get!(Entry, id)
+
+  @doc """
+  Creates a entry.
+
+  ## Examples
+
+      iex> create_entry(%{field: value})
+      {:ok, %Entry{}}
+
+      iex> create_entry(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_entry(attrs \\ %{}) do
+    %Entry{}
+    |> Entry.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a entry.
+
+  ## Examples
+
+      iex> update_entry(entry, %{field: new_value})
+      {:ok, %Entry{}}
+
+      iex> update_entry(entry, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_entry(%Entry{} = entry, attrs) do
+    entry
+    |> Entry.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Entry.
+
+  ## Examples
+
+      iex> delete_entry(entry)
+      {:ok, %Entry{}}
+
+      iex> delete_entry(entry)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_entry(%Entry{} = entry) do
+    Repo.delete(entry)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking entry changes.
+
+  ## Examples
+
+      iex> change_entry(entry)
+      %Ecto.Changeset{source: %Entry{}}
+
+  """
+  def change_entry(%Entry{} = entry) do
+    Entry.changeset(entry, %{})
+  end
+
+  alias Condorest.Ledger.Amount
+
+  @doc """
+  Returns the list of amounts.
+
+  ## Examples
+
+      iex> list_amounts()
+      [%Amount{}, ...]
+
+  """
+  def list_amounts do
+    Repo.all(Amount)
+  end
+
+  @doc """
+  Gets a single amount.
+
+  Raises `Ecto.NoResultsError` if the Amount does not exist.
+
+  ## Examples
+
+      iex> get_amount!(123)
+      %Amount{}
+
+      iex> get_amount!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_amount!(id), do: Repo.get!(Amount, id)
+
+  @doc """
+  Creates a amount.
+
+  ## Examples
+
+      iex> create_amount(%{field: value})
+      {:ok, %Amount{}}
+
+      iex> create_amount(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_amount(attrs \\ %{}) do
+    %Amount{}
+    |> Amount.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a amount.
+
+  ## Examples
+
+      iex> update_amount(amount, %{field: new_value})
+      {:ok, %Amount{}}
+
+      iex> update_amount(amount, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_amount(%Amount{} = amount, attrs) do
+    amount
+    |> Amount.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a Amount.
+
+  ## Examples
+
+      iex> delete_amount(amount)
+      {:ok, %Amount{}}
+
+      iex> delete_amount(amount)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_amount(%Amount{} = amount) do
+    Repo.delete(amount)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking amount changes.
+
+  ## Examples
+
+      iex> change_amount(amount)
+      %Ecto.Changeset{source: %Amount{}}
+
+  """
+  def change_amount(%Amount{} = amount) do
+    Amount.changeset(amount, %{})
+  end
 end

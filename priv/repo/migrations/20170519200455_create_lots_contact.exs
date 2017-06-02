@@ -6,6 +6,7 @@ defmodule Condorest.Repo.Migrations.CreateCondorest.Entity.Contact do
       add :name, :string
       timestamps()
     end
+    create unique_index(:entity_lot_types, [:name])
 
     create table(:entity_contacts) do
       add :name, :string

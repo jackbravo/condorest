@@ -27,6 +27,7 @@
         <li><label class="nav-header">Ledger</label></li>
         <ul class="">
           <li><%= link "Accounts", to: account_path(@conn, :index) %></li>
+          <li><%= link "Entries", to: entry_path(@conn, :index) %></li>
         </ul>
         <li><label class="nav-header">Session</label></li>
         <ul class="">

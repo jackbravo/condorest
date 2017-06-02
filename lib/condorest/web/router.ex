@@ -29,6 +29,7 @@ defmodule Condorest.Web.Router do
     resources "/lot_types", LotTypeController, only: [:new, :create, :index, :delete, :edit, :update]
     resources "/contacts", ContactController
     resources "/accounts", AccountController
+    resources "/entries", EntryController
   end
 
   # Other scopes may use custom stacks.
