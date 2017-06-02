@@ -9,3 +9,17 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias Condorest.Repo
+
+alias Condorest.Entity.LotType
+
+Repo.insert! %LotType{ name: "House" }
+Repo.insert! %LotType{ name: "Lot" }
+
+alias Condorest.Ledger.Account
+
+Repo.insert! %Account{ name: "Cash", type: "asset" }
+Repo.insert! %Account{ name: "Bank", type: "asset" }
+Repo.insert! %Account{ name: "Sales", type: "revenue" }
+Repo.insert! %Account{ name: "Purchases", type: "expense" }
