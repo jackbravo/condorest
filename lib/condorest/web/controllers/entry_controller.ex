@@ -2,6 +2,7 @@ defmodule Condorest.Web.EntryController do
   use Condorest.Web, :controller
 
   alias Condorest.Ledger
+  alias Condorest.Ledger.{ Amount, Entry }
 
   def index(conn, _params) do
     entries = Ledger.list_entries()
@@ -9,7 +10,7 @@ defmodule Condorest.Web.EntryController do
   end
 
   def new(conn, _params) do
-    changeset = Ledger.change_entry(%Condorest.Ledger.Entry{})
+    changeset = Ledger.change_entry(%Entry{amounts: [%Amount{}, %Amount{}]})
     render(conn, "new.html", changeset: changeset)
   end
 

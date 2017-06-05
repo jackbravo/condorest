@@ -21,6 +21,22 @@ defmodule Condorest.Ledger do
     Repo.all(Account)
   end
 
+  def accounts_for_select do
+    Account |> names_and_ids |> Repo.all
+  end
+
+  def names_and_ids(query) do
+    from i in query, select: { i.name, i.id }
+  end
+
+  def for_debit_accounts(query) do
+    from a in query, where: a.type in ^Account.debit_types()
+  end
+
+  def for_credit_accounts(query) do
+    from a in query, where: a.type in ^Account.credit_types()
+  end
+
   @doc """
   Gets a single account.
 
@@ -131,7 +147,7 @@ defmodule Condorest.Ledger do
       ** (Ecto.NoResultsError)
 
   """
-  def get_entry!(id), do: Repo.get!(Entry, id)
+  def get_entry!(id), do: Repo.get!(Entry, id) |> Repo.preload(amounts: :account)
 
   @doc """
   Creates a entry.

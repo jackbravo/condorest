@@ -48,14 +48,15 @@ defmodule Condorest.Ledger.Account do
     timestamps()
   end
 
-  @credit_types ["asset", "expense"]
-  @debit_types ["liability", "equity", "revenue"]
+  def debit_types, do: ["asset", "expense"]
+  def credit_types, do: ["liability", "equity", "revenue"]
+  def types, do: credit_types() ++ debit_types()
 
   @doc false
   def changeset(%Account{} = account, attrs) do
     account
     |> cast(attrs, [:name, :type, :contra])
     |> validate_required([:name, :type])
-    |> validate_inclusion(:type, @credit_types ++ @debit_types)
+    |> validate_inclusion(:type, types())
   end
 end

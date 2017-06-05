@@ -17,14 +17,15 @@ defmodule Condorest.Ledger.Amount do
     belongs_to :account, Account
   end
 
-  @amount_types ["credit", "debit"]
+  def amount_types, do: ["debit", "credit"]
 
   @doc false
   def changeset(%Amount{} = amount, attrs) do
     amount
-    |> cast(attrs, [:type, :amount])
-    |> validate_required([:type, :amount])
+    |> cast(attrs, [:type, :amount, :account_id])
+    |> validate_required([:type, :amount, :account_id])
     |> validate_number(:amount, greater_than_or_equal_to: 0)
-    |> validate_inclusion(:type, @amount_types)
+    |> validate_inclusion(:type, amount_types())
+    |> foreign_key_constraint(:account_id)
   end
 end

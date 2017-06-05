@@ -35,8 +35,8 @@ defmodule Condorest.Ledger.Entry do
     amounts = Ecto.Changeset.get_field(changeset, :amounts)
     amounts = Enum.group_by(amounts, fn(i) -> i.type end)
 
-    credit_sum = Enum.reduce(amounts["credit"], Decimal.new(0.0), fn(i, acc) -> Decimal.add(i.amount,acc) end )
-    debit_sum = Enum.reduce(amounts["debit"], Decimal.new(0.0), fn(i, acc) -> Decimal.add(i.amount,acc) end )
+    credit_sum = Enum.reduce(amounts["credit"] || [], Decimal.new(0.0), fn(i, acc) -> Decimal.add(i.amount,acc) end )
+    debit_sum = Enum.reduce(amounts["debit"] || [], Decimal.new(0.0), fn(i, acc) -> Decimal.add(i.amount,acc) end )
 
     if credit_sum == debit_sum do
       changeset

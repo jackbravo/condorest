@@ -13,9 +13,36 @@
 
   <div class="form-group">
     <%= label f, :date, class: "control-label" %>
-    <%= date_select f, :date, class: "form-control" %>
+    <%= date_select f, :date, default: Date.utc_today(), class: "form-control" %>
     <%= error_tag f, :date %>
   </div>
+
+  <h4>Amounts</h4>
+  <%= error_tag f, :amounts %>
+
+  <%= inputs_for f, :amounts, fn i -> %>
+  <div class="form-inline">
+    <div class="form-group">
+      <%= label i, :amount, class: "control-label sr-only" %>
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <%= text_input i, :amount, class: "form-control text-right", placeholder: "0.00" %>
+      </div>
+      <%= error_tag i, :amount %>
+    </div>
+    <div class="form-group">
+      <%= label i, :type, class: "control-label sr-only" %>
+      <%= select i, :type, Condorest.Ledger.Amount.amount_types(), class: "form-control" %>
+      <%= error_tag i, :type %>
+    </div>
+    <div class="form-group">
+      <%= label i, :account_id, class: "control-label sr-only" %>
+      <%= select i, :account_id, Condorest.Ledger.accounts_for_select(), class: "form-control" %>
+      <%= error_tag i, :account_id %>
+    </div>
+  </div>
+  <br>
+  <% end %>
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>

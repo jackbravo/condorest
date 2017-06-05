@@ -14,5 +14,18 @@
 
 </ul>
 
+<table class="table table-striped">
+  <thead><tr><th>Amount</th><th>Type</th><th>Account</th></tr></thead>
+  <tbody>
+<%= for amount <- @entry.amounts do %>
+  <tr>
+    <td class="text-right"><%= amount.amount %></td>
+    <td><%= amount.type %></td>
+    <td><%= amount.account.name %></td>
+  </tr>
+<% end %>
+  <tbody>
+</table>
+
 <span><%= link "Edit", to: entry_path(@conn, :edit, @entry) %></span>
 <span><%= link "Back", to: entry_path(@conn, :index) %></span>
