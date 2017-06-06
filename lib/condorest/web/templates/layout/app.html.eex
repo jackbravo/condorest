@@ -29,6 +29,10 @@
           <li><%= link "Accounts", to: account_path(@conn, :index) %></li>
           <li><%= link "Entries", to: entry_path(@conn, :index) %></li>
         </ul>
+        <li><label class="nav-header">Revenue</label></li>
+        <ul class="">
+          <li><%= link "Receipts", to: receipt_path(@conn, :index) %></li>
+        </ul>
         <li><label class="nav-header">Session</label></li>
         <ul class="">
             <li><%= @current_user.username %></li>

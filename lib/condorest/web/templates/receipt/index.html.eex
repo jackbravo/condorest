@@ -1,0 +1,32 @@
+<h2>Listing Receipts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Number</th>
+      <th>Details</th>
+      <th>Total amount</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for receipt <- @receipts do %>
+    <tr>
+      <td><%= receipt.date %></td>
+      <td><%= receipt.number %></td>
+      <td><%= receipt.details %></td>
+      <td><%= receipt.total_amount %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: receipt_path(@conn, :show, receipt), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: receipt_path(@conn, :edit, receipt), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: receipt_path(@conn, :delete, receipt), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Receipt", to: receipt_path(@conn, :new) %></span>

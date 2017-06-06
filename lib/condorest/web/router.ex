@@ -30,6 +30,7 @@ defmodule Condorest.Web.Router do
     resources "/contacts", ContactController
     resources "/accounts", AccountController
     resources "/entries", EntryController
+    resources "/receipts", ReceiptController
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,28 @@
+<h2>Show Receipt</h2>
+
+<ul>
+
+  <li>
+    <strong>Date:</strong>
+    <%= @receipt.date %>
+  </li>
+
+  <li>
+    <strong>Number:</strong>
+    <%= @receipt.number %>
+  </li>
+
+  <li>
+    <strong>Details:</strong>
+    <%= @receipt.details %>
+  </li>
+
+  <li>
+    <strong>Total amount:</strong>
+    <%= @receipt.total_amount %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: receipt_path(@conn, :edit, @receipt) %></span>
+<span><%= link "Back", to: receipt_path(@conn, :index) %></span>
