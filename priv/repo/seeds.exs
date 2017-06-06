@@ -21,5 +21,7 @@ alias Condorest.Ledger.Account
 
 Repo.insert! %Account{ name: "Cash", type: "asset" }
 Repo.insert! %Account{ name: "Bank", type: "asset" }
-Repo.insert! %Account{ name: "Sales", type: "revenue" }
+Repo.insert! %Account{ name: "Fees", type: "revenue" }
+Repo.insert! %Account{ name: "Deposits", type: "revenue" }
+Repo.insert! %Account{ name: "Administrative", type: "expense" }
 Repo.insert! %Account{ name: "Purchases", type: "expense" }
