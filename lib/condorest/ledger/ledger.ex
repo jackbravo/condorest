@@ -25,6 +25,13 @@ defmodule Condorest.Ledger do
     Account |> names_and_ids |> Repo.all
   end
 
+  def asset_accounts_for_select do
+    Account
+    |> names_and_ids
+    |> for_asset_accounts
+    |> Repo.all
+  end
+
   def names_and_ids(query) do
     from i in query, select: { i.name, i.id }
   end
@@ -35,6 +42,10 @@ defmodule Condorest.Ledger do
 
   def for_credit_accounts(query) do
     from a in query, where: a.type in ^Account.credit_types()
+  end
+
+  def for_asset_accounts(query) do
+    from a in query, where: a.type == ^"asset"
   end
 
   @doc """

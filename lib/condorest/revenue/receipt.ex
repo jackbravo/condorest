@@ -9,9 +9,9 @@ defmodule Condorest.Revenue.Receipt do
     field :details, :string
     field :number, :string
     field :total_amount, :decimal
-    field :asset_id, :id
-    field :revenue_id, :id
-    field :contact_id, :id
+    belongs_to :contact, Condorest.Entity.Contact    
+    belongs_to :entry, Condorest.Ledger.Entry
+    has_many :fee_lines, Condorest.Revenue.FeeLine
 
     timestamps()
   end
@@ -19,7 +19,8 @@ defmodule Condorest.Revenue.Receipt do
   @doc false
   def changeset(%Receipt{} = receipt, attrs) do
     receipt
-    |> cast(attrs, [:date, :number, :details, :total_amount])
-    |> validate_required([:date, :number, :details, :total_amount])
+    |> cast(attrs, [:date, :number, :details, :total_amount, :contact_id])
+    |> validate_required([:date, :number, :details, :total_amount, :contact_id])
+    |> foreign_key_constraint(:contact_id)
   end
 end
