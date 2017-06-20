@@ -35,7 +35,10 @@ defmodule Condorest.Revenue do
       ** (Ecto.NoResultsError)
 
   """
-  def get_receipt!(id), do: Repo.get!(Receipt, id)
+  def get_receipt!(id) do
+    Repo.get!(Receipt, id)
+    |> Repo.preload(:contact)
+  end
 
   @doc """
   Creates a receipt.

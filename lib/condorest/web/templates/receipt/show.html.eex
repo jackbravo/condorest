@@ -8,13 +8,13 @@
   </li>
 
   <li>
-    <strong>Number:</strong>
-    <%= @receipt.number %>
+    <strong>Contact:</strong>
+    <%= @receipt.contact.name %>
   </li>
 
   <li>
-    <strong>Details:</strong>
-    <%= @receipt.details %>
+    <strong>Number:</strong>
+    <%= @receipt.number %>
   </li>
 
   <li>
@@ -23,6 +23,9 @@
   </li>
 
 </ul>
+
+<h4>Details:</h4>
+<%= text_to_html(@receipt.details || "") %>
 
 <span><%= link "Edit", to: receipt_path(@conn, :edit, @receipt) %></span>
 <span><%= link "Back", to: receipt_path(@conn, :index) %></span>
