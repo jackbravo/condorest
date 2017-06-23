@@ -27,5 +27,20 @@
 <h4>Details:</h4>
 <%= text_to_html(@receipt.details || "") %>
 
+<h4>Fees</h4>
+
+<table class="table table-striped">
+  <thead><tr><th>Lot</th><th>Dates</th><th>Amount</th></tr></thead>
+  <tbody>
+<%= for fee_line <- @receipt.fee_lines do %>
+    <tr>
+      <td><%= fee_line.lot.name %></td>
+      <td><%= fee_line.date_start %> - <%= fee_line.date_end %></td>
+      <td class="text-right"><%= fee_line.amount %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
 <span><%= link "Edit", to: receipt_path(@conn, :edit, @receipt) %></span>
 <span><%= link "Back", to: receipt_path(@conn, :index) %></span>

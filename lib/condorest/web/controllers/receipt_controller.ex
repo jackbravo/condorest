@@ -2,6 +2,7 @@ defmodule Condorest.Web.ReceiptController do
   use Condorest.Web, :controller
 
   alias Condorest.Revenue
+  alias Condorest.Revenue.{ Receipt, FeeLine }
 
   def index(conn, _params) do
     receipts = Revenue.list_receipts()
@@ -9,7 +10,7 @@ defmodule Condorest.Web.ReceiptController do
   end
 
   def new(conn, _params) do
-    changeset = Revenue.change_receipt(%Condorest.Revenue.Receipt{})
+    changeset = Revenue.change_receipt(%Receipt{fee_lines: [%FeeLine{}]})
     render(conn, "new.html", changeset: changeset)
   end
 

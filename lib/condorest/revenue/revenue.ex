@@ -38,6 +38,7 @@ defmodule Condorest.Revenue do
   def get_receipt!(id) do
     Repo.get!(Receipt, id)
     |> Repo.preload(:contact)
+    |> Repo.preload(fee_lines: :lot)
   end
 
   @doc """

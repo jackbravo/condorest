@@ -20,7 +20,8 @@ defmodule Condorest.Revenue.Receipt do
   def changeset(%Receipt{} = receipt, attrs) do
     receipt
     |> cast(attrs, [:date, :number, :details, :total_amount, :contact_id])
-    |> validate_required([:date, :number, :details, :total_amount, :contact_id])
+    |> validate_required([:date, :number, :total_amount, :contact_id])
+    |> cast_assoc(:fee_lines)
     |> foreign_key_constraint(:contact_id)
   end
 end

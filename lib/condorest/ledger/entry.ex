@@ -22,7 +22,7 @@ defmodule Condorest.Ledger.Entry do
   def changeset(%Entry{} = entry, attrs) do
     entry
     |> cast(attrs, [:description, :date])
-    |> validate_required([:description, :date])
+    |> validate_required([:date])
     |> cast_assoc(:amounts)
     |> validate_debits_and_credits_balance
   end
