@@ -6,7 +6,7 @@ defmodule Condorest.Revenue.FeeLine do
 
   schema "revenue_fee_lines" do
     belongs_to :receipt, Receipt
-    field :amount, :decimal
+    field :amount, :decimal, default: Decimal.new(0.0)
     field :date_end, :date
     field :date_start, :date
     belongs_to :lot, Condorest.Entity.Lot

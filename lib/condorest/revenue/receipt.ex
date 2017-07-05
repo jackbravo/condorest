@@ -8,7 +8,7 @@ defmodule Condorest.Revenue.Receipt do
     field :date, :date
     field :details, :string
     field :number, :string
-    field :total_amount, :decimal
+    field :total_amount, :decimal, default: Decimal.new(0)
     belongs_to :contact, Condorest.Entity.Contact    
     belongs_to :entry, Condorest.Ledger.Entry
     has_many :fee_lines, Condorest.Revenue.FeeLine
