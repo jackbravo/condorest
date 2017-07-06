@@ -8,7 +8,7 @@ defmodule Condorest.Repo.Migrations.CreateCondorest.Revenue.Receipt do
       add :details, :string
       add :total_amount, :decimal, precision: 20, scale: 10, null: false
       add :contact_id, references(:entity_contacts, on_delete: :nothing)
-      add :entry_id, references(:ledger_entries, on_delete: :nothing)
+      add :entry_id, references(:ledger_entries, on_delete: :nilify_all)
 
       timestamps()
     end

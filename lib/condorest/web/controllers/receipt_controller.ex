@@ -50,7 +50,6 @@ defmodule Condorest.Web.ReceiptController do
   end
 
   def delete(conn, %{"id" => id}) do
-    # TODO
     receipt = Revenue.get_receipt!(id)
     {:ok, _receipt} = Revenue.delete_receipt(receipt)
 

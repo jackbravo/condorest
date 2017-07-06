@@ -87,6 +87,7 @@ defmodule Condorest.Revenue do
 
   """
   def delete_receipt(%Receipt{} = receipt) do
+    if (receipt.entry_id), do: Repo.delete(receipt.entry)
     Repo.delete(receipt)
   end
 
