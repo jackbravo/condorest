@@ -15,12 +15,12 @@ defmodule Condorest.Web.ReceiptController do
   end
 
   def create(conn, %{"receipt" => receipt_params}) do
-    case Revenue.create_receipt(receipt_params) do
-      {:ok, receipt} ->
+    case Revenue.insert_or_update_receipt_with_entry(%Receipt{}, receipt_params) do
+      {:ok, %{receipt: receipt}} ->
         conn
         |> put_flash(:info, "Receipt created successfully.")
         |> redirect(to: receipt_path(conn, :show, receipt))
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, :receipt, %Ecto.Changeset{} = changeset, _} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
@@ -39,17 +39,18 @@ defmodule Condorest.Web.ReceiptController do
   def update(conn, %{"id" => id, "receipt" => receipt_params}) do
     receipt = Revenue.get_receipt!(id)
 
-    case Revenue.update_receipt(receipt, receipt_params) do
-      {:ok, receipt} ->
+    case Revenue.insert_or_update_receipt_with_entry(receipt, receipt_params) do
+      {:ok, %{receipt: receipt}} ->
         conn
         |> put_flash(:info, "Receipt updated successfully.")
         |> redirect(to: receipt_path(conn, :show, receipt))
-      {:error, %Ecto.Changeset{} = changeset} ->
+      {:error, :receipt, %Ecto.Changeset{} = changeset, _} ->
         render(conn, "edit.html", receipt: receipt, changeset: changeset)
     end
   end
 
   def delete(conn, %{"id" => id}) do
+    # TODO
     receipt = Revenue.get_receipt!(id)
     {:ok, _receipt} = Revenue.delete_receipt(receipt)
 

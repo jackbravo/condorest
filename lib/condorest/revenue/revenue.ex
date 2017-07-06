@@ -7,6 +7,7 @@ defmodule Condorest.Revenue do
   alias Condorest.Repo
 
   alias Condorest.Revenue.Receipt
+  alias Condorest.Ledger.Entry
 
   @doc """
   Returns the list of receipts.
@@ -39,42 +40,38 @@ defmodule Condorest.Revenue do
     Repo.get!(Receipt, id)
     |> Repo.preload(:contact)
     |> Repo.preload(fee_lines: :lot)
+    |> Repo.preload(entry: :amounts)
   end
 
-  @doc """
-  Creates a receipt.
-
-  ## Examples
-
-      iex> create_receipt(%{field: value})
-      {:ok, %Receipt{}}
-
-      iex> create_receipt(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def create_receipt(attrs \\ %{}) do
-    %Receipt{}
-    |> Receipt.changeset(attrs)
-    |> Repo.insert()
+  def insert_or_update_receipt_with_entry(receipt, attrs) do
+    Ecto.Multi.new
+    |> Ecto.Multi.run(:entry, &insert_or_update_entry_from_receipt(&1, receipt, attrs))
+    |> Ecto.Multi.run(:receipt, &insert_or_update_receipt(&1, receipt, attrs))
+    |> Repo.transaction()
   end
 
-  @doc """
-  Updates a receipt.
+  defp insert_or_update_entry_from_receipt(_changes, %Receipt{} = receipt, attrs) do
+    revenue_id = Condorest.Ledger.account_id_from_name("Fees")
+    entry = get_entry_from_receipt(receipt)
+    [a1, a2 | _] =
+      case length(entry.amounts) do
+        2 -> entry.amounts
+        _ -> [%{id: nil}, %{id: nil}]
+      end
+    entry_attr = %{ date: attrs["date"], amounts: [
+      %{ type: "debit", amount: attrs["total_amount"], account_id: attrs["asset_id"], id: a1.id },
+      %{ type: "credit", amount: attrs["total_amount"], account_id: revenue_id, id: a2.id }
+    ]}
+    Repo.insert_or_update Entry.changeset(entry, entry_attr)
+  end
 
-  ## Examples
+  defp get_entry_from_receipt(%Receipt{entry_id: nil}),
+    do: %Entry{amounts: []}
+  defp get_entry_from_receipt(%Receipt{} = receipt),
+    do: receipt.entry
 
-      iex> update_receipt(receipt, %{field: new_value})
-      {:ok, %Receipt{}}
-
-      iex> update_receipt(receipt, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_receipt(%Receipt{} = receipt, attrs) do
-    receipt
-    |> Receipt.changeset(attrs)
-    |> Repo.update()
+  defp insert_or_update_receipt(%{entry: entry}, receipt, attrs) do
+    Repo.insert_or_update Receipt.changeset(receipt, entry, attrs)
   end
 
   @doc """

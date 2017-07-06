@@ -21,6 +21,10 @@ defmodule Condorest.Ledger do
     Repo.all(Account)
   end
 
+  def account_id_from_name(name) do
+    Repo.one!(from a in Account, where: a.name == ^name, select: a.id)
+  end
+
   def accounts_for_select do
     Account |> names_and_ids |> Repo.all
   end
