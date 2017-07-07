@@ -47,6 +47,10 @@ body,html,.row-offcanvas {
   overflow:auto;
 }
 
+form .year-month select+select+select {
+  display: none;
+}
+
 /*
  * off Canvas sidebar
  * --------------------------------------------------

@@ -54,13 +54,13 @@
       <%= error_tag i, :lot_id %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group year-month">
       <%= label i, :date_start, class: "control-label" %>
       <%= date_select i, :date_start, class: "form-control" %>
       <%= error_tag i, :date_start %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group year-month">
       <%= label i, :date_end, class: "control-label" %>
       <%= date_select i, :date_end, class: "form-control" %>
       <%= error_tag i, :date_end %>
