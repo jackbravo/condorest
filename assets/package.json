@@ -6,6 +6,7 @@
     "watch": "brunch watch --stdin"
   },
   "dependencies": {
+    "flatpickr": "^3.0.6",
     "phoenix": "link:./../deps/phoenix",
     "phoenix_html": "link:./../deps/phoenix_html"
   },
