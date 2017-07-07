@@ -13,7 +13,7 @@
 
   <div class="form-group">
     <%= label f, :date, class: "control-label" %>
-    <%= date_select f, :date, default: Date.utc_today(), class: "form-control" %>
+    <%= text_input f, :date, default: Date.utc_today(), class: "form-control flatpickr" %>
     <%= error_tag f, :date %>
   </div>
 

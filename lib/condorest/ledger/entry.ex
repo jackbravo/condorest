@@ -10,7 +10,7 @@ defmodule Condorest.Ledger.Entry do
 
 
   schema "ledger_entries" do
-    field :date, :date
+    field :date, Condorest.Form.Date
     field :description, :string
 
     has_many :amounts, Amount

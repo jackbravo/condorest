@@ -5,7 +5,7 @@ defmodule Condorest.Revenue.Receipt do
 
 
   schema "revenue_receipts" do
-    field :date, :date
+    field :date, Condorest.Form.Date
     field :details, :string
     field :number, :string
     field :total_amount, :decimal, default: Decimal.new(0)
