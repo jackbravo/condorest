@@ -1,23 +1,4 @@
-<h2>Show Account</h2>
-
-<ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @account.name %>
-  </li>
-
-  <li>
-    <strong>Type:</strong>
-    <%= @account.type %>
-  </li>
-
-  <li>
-    <strong>Contra:</strong>
-    <%= @account.contra %>
-  </li>
-
-</ul>
+<h2><%= @account.name %> <small>(<%= if @account.contra, do: "-" %><%= @account.type %>)</small></h2>
 
 <span><%= link "Edit", to: account_path(@conn, :edit, @account) %></span>
 <span><%= link "Back", to: account_path(@conn, :index) %></span>
