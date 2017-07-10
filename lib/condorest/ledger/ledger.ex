@@ -260,6 +260,25 @@ defmodule Condorest.Ledger do
   """
   def get_amount!(id), do: Repo.get!(Amount, id)
 
+  def amount_sum(account, type) do
+    query = from a in Amount,
+      select: sum(a.amount),
+      where: a.account_id == ^account.id,
+      where: a.type == ^type
+    Repo.one(query) || Decimal.new(0)
+  end
+
+  def balance(account = %Account { type: type, contra: contra }) do
+    credits = amount_sum(account, "credit")
+    debits =  amount_sum(account, "debit")
+
+    if type in Account.debit_types() && !(contra) do
+      Decimal.sub(debits, credits)
+    else
+      Decimal.sub(credits, debits)
+    end
+  end
+
   @doc """
   Creates a amount.
 
