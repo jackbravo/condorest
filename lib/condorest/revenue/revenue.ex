@@ -43,10 +43,17 @@ defmodule Condorest.Revenue do
     |> Repo.preload(entry: :amounts)
   end
 
+  @doc """
+  Inserts or updates a receipt but also creating an associated entry.
+
+  We insert/update first the receipt because we want any validation error
+  to come out first for :receipt so we can display it in the form.
+  """
   def insert_or_update_receipt_with_entry(receipt, attrs) do
     Ecto.Multi.new
-    |> Ecto.Multi.run(:entry, &insert_or_update_entry_from_receipt(&1, receipt, attrs))
     |> Ecto.Multi.run(:receipt, &insert_or_update_receipt(&1, receipt, attrs))
+    |> Ecto.Multi.run(:entry, &insert_or_update_entry_from_receipt(&1, receipt, attrs))
+    |> Ecto.Multi.run(:assoc, &assoc_receipt_with_entry(&1))
     |> Repo.transaction()
   end
 
@@ -70,8 +77,12 @@ defmodule Condorest.Revenue do
   defp get_entry_from_receipt(%Receipt{} = receipt),
     do: receipt.entry
 
-  defp insert_or_update_receipt(%{entry: entry}, receipt, attrs) do
-    Repo.insert_or_update Receipt.changeset(receipt, entry, attrs)
+  defp insert_or_update_receipt(_changes, receipt, attrs) do
+    Repo.insert_or_update Receipt.changeset(receipt, attrs)
+  end
+
+  defp assoc_receipt_with_entry(%{receipt: receipt, entry: entry}) do
+    Ecto.Changeset.change(receipt, entry_id: entry.id) |> Repo.update
   end
 
   @doc """

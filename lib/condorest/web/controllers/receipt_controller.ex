@@ -21,7 +21,8 @@ defmodule Condorest.Web.ReceiptController do
         |> put_flash(:info, "Receipt created successfully.")
         |> redirect(to: receipt_path(conn, :show, receipt))
       {:error, :receipt, %Ecto.Changeset{} = changeset, _} ->
-        render(conn, "new.html", changeset: changeset)
+        # For some reason changeset doesn't have :action set (maybe Ecto.Multi.run error?)
+        render(conn, "new.html", changeset: %{changeset | action: :invalid})
     end
   end
 
