@@ -22,6 +22,13 @@ defmodule Condorest.Revenue do
     Repo.all(Receipt)
   end
 
+  def list_fees_for(lot) do
+    query = from f in Condorest.Revenue.FeeLine,
+      where: f.lot_id == ^lot.id,
+      order_by: [desc: f.date_start]
+    Repo.all query
+  end
+
   @doc """
   Gets a single receipt.
 

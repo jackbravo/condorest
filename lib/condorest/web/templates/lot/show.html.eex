@@ -12,5 +12,20 @@
 </ul>
 </p>
 
+<h4>Fees</h4>
+
+<table class="table table-stripped">
+  <thead><tr><th>Date</th><th>Amount</th><th>Receipt</th></tr></thead>
+  <tbody>
+    <%= for f <- @fees do %>
+    <tr>
+      <td><%= f.date_start %> to <%= f.date_end %></td>
+      <td><%= f.amount %></td>
+      <td><%= link f.receipt_id, to: receipt_path(@conn, :show, f.receipt_id) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <span><%= link "Edit", to: lot_path(@conn, :edit, @lot) %></span>
 <span><%= link "Back", to: lot_path(@conn, :index) %></span>

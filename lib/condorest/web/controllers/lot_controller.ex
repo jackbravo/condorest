@@ -26,7 +26,8 @@ defmodule Condorest.Web.LotController do
 
   def show(conn, %{"id" => id}) do
     lot = Entity.get_lot!(id)
-    render(conn, "show.html", lot: lot)
+    fees = Condorest.Revenue.list_fees_for(lot)
+    render(conn, "show.html", lot: lot, fees: fees)
   end
 
   def edit(conn, %{"id" => id}) do
