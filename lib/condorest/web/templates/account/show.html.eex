@@ -2,7 +2,7 @@
 
 <p><strong>Balance: </strong><%= @balance %></p>
 
-<table class="table table-stripped">
+<table class="table table-striped">
   <thead><tr><th>Date</th><th>Amount</th><th>Type</th></tr></thead>
   <tbody>
     <%= for a <- @amounts do %>
