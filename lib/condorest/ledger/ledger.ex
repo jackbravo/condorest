@@ -244,6 +244,15 @@ defmodule Condorest.Ledger do
     Repo.all(Amount)
   end
 
+  def list_amounts_for(account) do
+    query = from a in Amount,
+      join: e in Entry, on: [id: a.entry_id],
+      where: a.account_id == ^account.id,
+      order_by: [desc: e.date],
+      select: %{amount: a.amount, type: a.type, date: e.date}
+    Repo.all query
+  end
+
   @doc """
   Gets a single amount.
 

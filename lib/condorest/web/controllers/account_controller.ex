@@ -27,7 +27,8 @@ defmodule Condorest.Web.AccountController do
   def show(conn, %{"id" => id}) do
     account = Ledger.get_account!(id)
     balance = Ledger.balance(account)
-    render(conn, "show.html", account: account, balance: balance)
+    amounts = Ledger.list_amounts_for(account)
+    render(conn, "show.html", account: account, balance: balance, amounts: amounts)
   end
 
   def edit(conn, %{"id" => id}) do
